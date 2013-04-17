@@ -24,6 +24,8 @@ then
  OPT='w errorbars'
 fi
 
+FOLDER=`pwd`
+
 
 echo '###################################'
 echo "plot $FILE u $COL $OPT"
@@ -33,6 +35,7 @@ tail -n 4 $FILE
 echo '###################################'
  gnuplot -persist  <<-TOEND
     reset
+    set title "in $FOLDER, plot $FILE u $COL $OPT"
     set terminal wxt size 800,600
     plot "${FILE}" u $COL $OPT
   TOEND
