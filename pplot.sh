@@ -36,7 +36,7 @@ echo '###################################'
  gnuplot -persist  <<-TOEND
     reset
     set title "[$FOLDER] plot $FILE u $COL $OPT"
-    set terminal wxt size 800,600
+    set terminal wxt size 700,500
     plot "${FILE}" u $COL $OPT
   TOEND
 
