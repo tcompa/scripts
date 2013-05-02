@@ -13,7 +13,6 @@ int main(){
   return 2;
  } 
  fscanf(in_file,"%d %d",&alpha,&beta);
- //fgets(outfilename,100,in_file);
  fscanf(in_file,"%s",outfilename);
  fclose(in_file);
 

@@ -25,3 +25,5 @@ for ((alpha=1;alpha<=3;alpha++)); do
 
  done
 done
+
+rm $PROGRAM
