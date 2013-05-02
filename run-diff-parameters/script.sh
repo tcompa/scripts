@@ -13,7 +13,6 @@ touch $INPUTFILE
 for ((alpha=1;alpha<=3;alpha++)); do
  for ((beta=1;beta<=3;beta++)); do
 
-  echo "alpha=$alpha, beta=$beta: start"
 
   #prepare the input file:
   rm $INPUTFILE
@@ -22,8 +21,7 @@ for ((alpha=1;alpha<=3;alpha++)); do
   #run the program:
   ./$PROGRAM
 
-  echo "alpha=$alpha, beta=$beta: end"
-  echo
+  echo "alpha=$alpha, beta=$beta - done"
 
  done
 done
