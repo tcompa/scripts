@@ -31,7 +31,7 @@ echo '###################################'
 echo "plot $FILE u $COL $OPT"
 head -n 4 $FILE
 echo "..."
-tail -n 4 $FILE
+tail -n 2 $FILE
 echo '###################################'
  gnuplot -persist  <<-TOEND
     reset
