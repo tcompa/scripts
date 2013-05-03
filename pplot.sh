@@ -29,9 +29,9 @@ FOLDER=`pwd`
 
 echo '###################################'
 echo "plot $FILE u $COL $OPT"
-head -n 4 $FILE
+head -n 3 $FILE
 echo "..."
-tail -n 2 $FILE
+tail -n 1 $FILE
 echo '###################################'
  gnuplot -persist  <<-TOEND
     reset
