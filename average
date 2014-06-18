@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "$#" -ne 2 ]; then
+    echo "ERROR: expected inputs are (filename, column number)"
+    exit 1
+fi
+
+FILE=$1
+COL=$2
+
+awk "{ sum += \$$COL } END { if (NR > 0) print sum / NR }" $FILE
