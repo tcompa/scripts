@@ -83,7 +83,7 @@ def naive_look_for_converged_error(errors):
     Use at your own risk (it is always better to check the plot by yourself).
     """
     for i in xrange(len(errors) - 1):
-        if errors[i] > errors[i + 1]:
+        if errors[i] >= errors[i + 1]:
             return errors[i]
     return errors[-1]
 
