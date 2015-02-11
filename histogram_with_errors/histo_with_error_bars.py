@@ -119,7 +119,7 @@ def histogram_with_errors(x, nbins, base, ID):
     for k in xrange(nbins):
         obs = numpy.logical_and(x > bin_edges[k], x < bin_edges[k + 1])
         dummy1, errors, av = bunching_v2(obs, base, 'bin %i' % k, out_dir + 'data_bin_%03i.dat' % k, out_dir + 'plot_bin_%03i.png' % k, DoPlot=True)
-        err = look_for_err(errors)
+        err = naive_look_for_converged_error(errors)
         av  /= bin_width
         err /= bin_width
         h.append(av)
