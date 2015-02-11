@@ -131,8 +131,7 @@ def histogram_with_errors(x, nbins, base, ID):
     # do plot
     plt.clf()
     plt.errorbar(bin_centers, h, yerr=h_err)
-    ax = plt.gca()
-    ax.set_xlim(xmin * 0.95, xmax * 1.05)
+    pl.xlim(xmin * 0.95, xmax * 1.05)
     plt.title('%s' % ID)
     plt.grid()
     plt.savefig('plot_' + ID + '.png', bbox_inches='tight')
