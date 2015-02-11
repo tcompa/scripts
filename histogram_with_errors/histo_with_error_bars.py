@@ -77,12 +77,16 @@ def bunching_v2(obs, base, namevar, datafile, plotname, DoPlot=True):
     obs_av = numpy.mean(obs)
     return binwidths, errors, obs_av
 
-def look_for_err(l_err):
-    for i in xrange(len(l_err) - 1):
-        if l_err[i] > l_err[i + 1]:
-            return l_err[i]
-    return l_err[-1]
-
+def naive_look_for_converged_error(errors):
+    """
+    This function is an *extremely* naive way of checking whether a plateau has
+    been reached (just looking for the first decrease in the error list).
+    Use at your own risk (it is always better to check the plot by yourself).
+    """
+    for i in xrange(len(errors) - 1):
+        if errors[i] > errors[i + 1]:
+            return errors[i]
+    return errors[-1]
 
 def histogram_with_errors(x, nbins, base, ID):
     """
@@ -136,9 +140,9 @@ def histogram_with_errors(x, nbins, base, ID):
 
 if __name__ == '__main__':
 
+    import random
     print 'Executing %s as main' % sys.argv[0]
 
-    import random
     # construct a correlated time-series
     nsamples = 10 ** 6
     max_delta_x = 0.5
