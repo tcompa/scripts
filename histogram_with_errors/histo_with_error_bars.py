@@ -129,6 +129,7 @@ def histogram_with_errors(x, nbins, base, ID):
         print 'bin %3i: %.6f +/- %.6f (%.2f %%)' % (k, av, err, err * 100.0 / av)
     out.close()
     # do plot
+    plt.clf()
     plt.errorbar(bin_centers, h, yerr=h_err)
     ax = plt.gca()
     ax.set_xlim(xmin * 0.95, xmax * 1.05)
@@ -136,6 +137,7 @@ def histogram_with_errors(x, nbins, base, ID):
     plt.grid()
     plt.savefig('plot_' + ID + '.png', bbox_inches='tight')
     plt.close()
+    return
 
 if __name__ == '__main__':
 
