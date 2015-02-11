@@ -79,7 +79,7 @@ def bunching_v2(obs, base, namevar, datafile, plotname, DoPlot=True):
 def naive_look_for_converged_error(errors):
     """
     This function is an *extremely* naive way of checking whether a plateau has
-    been reached (just looking for the first decrease in the error list).
+    been reached (just looking for the first non-increase in the error list).
     Use at your own risk (it is always better to check the plot by yourself).
     """
     for i in xrange(len(errors) - 1):
@@ -131,7 +131,7 @@ def histogram_with_errors(x, nbins, base, ID):
     # do plot
     plt.clf()
     plt.errorbar(bin_centers, h, yerr=h_err)
-    pl.xlim(xmin * 0.95, xmax * 1.05)
+    plt.xlim(xmin * 0.95, xmax * 1.05)
     plt.title('%s' % ID)
     plt.grid()
     plt.savefig('plot_' + ID + '.png', bbox_inches='tight')
