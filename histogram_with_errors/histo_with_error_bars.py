@@ -11,7 +11,7 @@ from matplotlib import pyplot as plt
 
 def err_independent(obs):
     """
-    Error on the average of a set of independent samples.
+    Error on the average for a set of independent samples.
     """
     if type(obs) is list:
         obs = numpy.array(obs)
@@ -41,19 +41,18 @@ def bunching_v2(obs, base, namevar, datafile, plotname, DoPlot=True):
     if n_binwidths < 2:
         sys.exit('ERROR: not enough data. Exit.')
     # perform binning
+    obs_av   = numpy.mean(obs)
+    errors   = [err_independent(obs)]
     old_list = []
-    new_list = [i for i in obs]
-    factors = [1] + [binwidths[i + 1] / binwidths[i] for i in xrange(n_binwidths - 1)]
-    errors = []
-    for l in xrange(n_binwidths):
+    new_list = obs.tolist()
+    for l in xrange(1, n_binwidths):
        # one binning step
-       factor = factors[l]
        old_list = new_list[:]
-       size = len(old_list)
+       elements_left = len(old_list)
        new_list = []
-       while size > factor:
-          new_list.append(sum(old_list.pop() for i in xrange(factor)) / float(factor))
-          size -= factor
+       while elements_left > base:
+          new_list.append(sum(old_list.pop() for i in xrange(base)) / float(base))
+          elements_left -= base
        errors.append(err_independent(new_list))
     # write results
     f = open(datafile, "w")
@@ -73,7 +72,6 @@ def bunching_v2(obs, base, namevar, datafile, plotname, DoPlot=True):
         plt.ylabel('err ' + namevar, fontsize=18)
         plt.savefig(plotname, bbox_inches='tight')
         plt.close()
-    obs_av = numpy.mean(obs)
     return binwidths, errors, obs_av
 
 def naive_look_for_converged_error(errors):
@@ -118,7 +116,9 @@ def histogram_with_errors(x, nbins, base, ID):
     print '[histo_with_err] start error analysis for each bin'
     for k in xrange(nbins):
         obs = numpy.logical_and(x > bin_edges[k], x < bin_edges[k + 1])
-        dummy1, errors, av = bunching_v2(obs, base, 'bin %i' % k, out_dir + 'data_bin_%03i.dat' % k, out_dir + 'plot_bin_%03i.png' % k, DoPlot=True)
+        dummy1, errors, av = bunching_v2(obs, base, 'bin %i' % k,
+                               out_dir + 'data_bin_%03i.dat' % k,
+                               out_dir + 'plot_bin_%03i.png' % k, DoPlot=True)
         err = naive_look_for_converged_error(errors)
         av  /= bin_width
         err /= bin_width
@@ -143,9 +143,9 @@ if __name__ == '__main__':
     import random
     print 'Executing %s as main' % sys.argv[0]
 
-    # construct a correlated time-series
+    # construct a correlated time-series, sampling uniformly between -1 and 1
     nsamples = 10 ** 6
-    max_delta_x = 0.5
+    max_delta_x = 0.6
     x = [0.0]
     for sample in xrange(nsamples - 1):
         xnew = x[-1] + random.uniform(-max_delta_x, max_delta_x)
@@ -158,6 +158,6 @@ if __name__ == '__main__':
     
     # construct histogram
     nbins = 10
-    base  = 16
+    base  = 10
     ID    = 'test_%03i' % nbins
     histogram_with_errors(x, nbins, base, ID)
