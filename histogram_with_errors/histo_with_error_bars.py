@@ -33,7 +33,6 @@ def bunching_v2(obs, base, namevar, datafile, plotname, DoPlot=True):
       binwidths : list of bin widths considered
       errors    : apparent error for the bin widths considered
       obs_av    : average of obs
-        
     """
     # define bin widths, and keep them only if (average occupation) > 32
     binwidths = [base ** k for k in xrange(40)]
