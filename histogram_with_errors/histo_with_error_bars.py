@@ -44,7 +44,7 @@ def bunching_v2(obs, base, namevar, datafile, plotname, DoPlot=True):
     obs_av   = numpy.mean(obs)
     errors   = [err_independent(obs)]
     old_list = []
-    new_list = obs.tolist()
+    new_list = [i for i in obs]
     for l in xrange(1, n_binwidths):
        # one binning step
        old_list = new_list[:]
@@ -85,14 +85,15 @@ def naive_look_for_converged_error(errors):
             return errors[i]
     return errors[-1]
 
-def histogram_with_errors(x, nbins, base, ID):
+def histogram_with_errors(x, nbins, base, ID, limits=[]):
     """
     Function performing bunching on every bin of the histogram.
     Input:
-      x     : array of samples
-      nbins : number of bins
-      base  : bin widths are taken to be 1, base, base^2, base^3..
-      ID    : identifying string
+      x      : array of samples
+      nbins  : number of bins
+      base   : bin widths are taken to be 1, base, base^2, base^3..
+      ID     : identifying string
+      limits : min/max values for the histogram (optional)
     """
     # numpy-fy observable
     if type(x) is list:
@@ -103,20 +104,25 @@ def histogram_with_errors(x, nbins, base, ID):
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
     # define bins
-    xmin, xmax = numpy.amin(x), numpy.amax(x)
-    bin_edges = numpy.linspace(xmin * 0.995, xmax * 1.005, nbins + 1)
+    if limits:
+        xmin, xmax = limits
+    else:
+        xmin, xmax = numpy.amin(x) - 1e-12, numpy.amax(x) + 1e-12
+    bin_edges = numpy.linspace(xmin, xmax, nbins + 1)
+    print bin_edges
     bin_width = bin_edges[1] - bin_edges[0]
     bin_centers = 0.5 * (bin_edges[1:] + bin_edges[:-1])
-    print '[histo_with_err] #data:         %i' % x.shape[0]
-    print '[histo_with_err] #bins:         %i' % nbins
-    print '[histo_with_err] bin-width base: %i' % base
+    print '[histo_with_err] #data:           %i' % x.shape[0]
+    print '[histo_with_err] #bins:           %i' % nbins
+    print '[histo_with_err] binning base:    %i' % base
+    print '[histo_with_err] histo bin width: %f' % bin_width
     # perform bunching for each bin
     h, h_err = [], []
     out = open(name_output, 'w')
     print '[histo_with_err] start error analysis for each bin'
     for k in xrange(nbins):
-        obs = numpy.logical_and(x > bin_edges[k], x < bin_edges[k + 1])
-        dummy1, errors, av = bunching_v2(obs, base, 'bin %i' % k,
+        binned_x = numpy.logical_and(x > bin_edges[k], x < bin_edges[k + 1])
+        dummy1, errors, av = bunching_v2(binned_x, base, 'bin %i' % k,
                                out_dir + 'data_bin_%03i.dat' % k,
                                out_dir + 'plot_bin_%03i.png' % k, DoPlot=True)
         err = naive_look_for_converged_error(errors)
@@ -131,7 +137,7 @@ def histogram_with_errors(x, nbins, base, ID):
     # do plot
     plt.clf()
     plt.errorbar(bin_centers, h, yerr=h_err)
-    plt.xlim(xmin * 0.95, xmax * 1.05)
+    plt.xlim(xmin * 0.999, xmax * 1.001)
     plt.title('%s' % ID)
     plt.grid()
     plt.savefig('plot_' + ID + '.png', bbox_inches='tight')
@@ -144,8 +150,8 @@ if __name__ == '__main__':
     print 'Executing %s as main' % sys.argv[0]
 
     # construct a correlated time-series, sampling uniformly between -1 and 1
-    nsamples = 10 ** 6
-    max_delta_x = 0.6
+    nsamples = 10 ** 7
+    max_delta_x = 0.5
     x = [0.0]
     for sample in xrange(nsamples - 1):
         xnew = x[-1] + random.uniform(-max_delta_x, max_delta_x)
@@ -155,9 +161,9 @@ if __name__ == '__main__':
             x.append(x[-1])
     x = numpy.array(x)
     print 'Generated a correlated time-series of %i values.' % nsamples
-    
-    # construct histogram
+
+    # construct histogram with error bars
     nbins = 10
-    base  = 10
+    base  = 8
     ID    = 'test_%03i' % nbins
-    histogram_with_errors(x, nbins, base, ID)
+    histogram_with_errors(x, nbins, base, ID, limits=[0.0, 1.0])
