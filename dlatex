@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # program: dlatex (bash script)
-# last-modified: 2015-06-17 -- 18:00 CEST
+# last-modified: 2015-07-14 -- 16:00 CEST
 # author: tc
 
 
@@ -37,11 +37,8 @@ fi
 NBIB=`ls -1 *.bib 2>/dev/null | wc -l`
 
 if [ $PROCEED == 1 ]; then
-    #NAME=`echo $FILE | cut -d '.' -f 1`
     NAME=`basename $FILE ".tex"`
     echo "Processing $FILE.. ($NAME)"
-    echo $NAME2
-    #rm -v ${name}.{aux,blg,bbl}
     pdflatex $FILE
     if [ $NBIB != 0 ]; then 
         echo "bibtex $NAME.aux"
