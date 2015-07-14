@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# Script to open articles from APS journals (see link.aps.org)
-# tc, 2014-04-04
+# program:       aps_article.sh
+# author:        tc
+# last modified: 2015-07-14 -- 16:30 CEST
+# notes:         opens articles from APS journals (see link.aps.org)
 
 # Choose a browser
 BROWSER=firefox
 
 # If you want to use a proxy, uncomment the next line and set the correct address
-#PROXY=.proxy.example.university.org
+#PROXY=.accesdistant.upmc.fr
 
 
 echo
@@ -17,22 +19,17 @@ echo 'Script to fetch articles from APS journals (PRL,PRA,PRB,RMP,..)'
 echo
 
 #Input
-read -p "Journal? [PRL]  " JOURNAL
+read -p "Journal? [default: PRL]  " JOURNAL
 read -p "Volume? " VOLUME
 read -p "Page? " PAGE
 HOMEPAGE=0
 
 # Check journal
-if [ "$JOURNAL" == 'a' ]; then JOURNAL=PRA; fi;
-if [ "$JOURNAL" == 'b' ]; then JOURNAL=PRB; fi;
-if [ "$JOURNAL" == 'c' ]; then JOURNAL=PRC; fi;
-if [ "$JOURNAL" == 'd' ]; then JOURNAL=PRD; fi;
-if [ "$JOURNAL" == 'e' ]; then JOURNAL=PRE; fi;
-if [ "$JOURNAL" == 'PRA' ]; then JOURNAL_long=PhysRevA; fi;
-if [ "$JOURNAL" == 'PRB' ]; then JOURNAL_long=PhysRevB; fi;
-if [ "$JOURNAL" == 'PRC' ]; then JOURNAL_long=PhysRevC; fi;
-if [ "$JOURNAL" == 'PRD' ]; then JOURNAL_long=PhysRevD; fi;
-if [ "$JOURNAL" == 'PRE' ]; then JOURNAL_long=PhysRevE; fi;
+if [ "$JOURNAL" == 'a' ]; then JOURNAL=PRA; JOURNAL_long=PhysRevA; fi;
+if [ "$JOURNAL" == 'b' ]; then JOURNAL=PRB; JOURNAL_long=PhysRevB; fi;
+if [ "$JOURNAL" == 'c' ]; then JOURNAL=PRC; JOURNAL_long=PhysRevC; fi;
+if [ "$JOURNAL" == 'd' ]; then JOURNAL=PRD; JOURNAL_long=PhysRevD; fi;
+if [ "$JOURNAL" == 'e' ]; then JOURNAL=PRE; JOURNAL_long=PhysRevE; fi;
 
 JOURNAL_lo=`echo $JOURNAL | tr [:upper:] [:lower:]`
 JOURNAL_up=`echo $JOURNAL | tr [:lower:] [:upper:]`
@@ -50,14 +47,7 @@ else
  HOMEPAGE=1
  echo '  wrong volume number -> journal homepage'
 fi
-
-# Check page
-#if [[ $PAGE =~ ^[\-0-9]+$ ]] && (( $PAGE > 0)); then
 echo '  page set to '$PAGE
-#else
-# HOMEPAGE=1
-# echo '  wrong page number -> journal homepage'
-#fi
 
 if [ "$HOMEPAGE" == '0' ]; then
  LINK=http://journals.aps.org$PROXY/$JOURNAL_lo/abstract/10.1103/$JOURNAL_long.$VOLUME.$PAGE
