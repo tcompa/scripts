@@ -1,14 +1,19 @@
 #!/bin/bash
 
-NTEX=`ls ./*.tex | wc -l`
+# program: dlatex (bash script)
+# last-modified: 2015-06-17 -- 18:00 CEST
+# author: tc
+
+
+NTEX=`ls ./*.tex |grep -v bak| wc -l`
 if [ $NTEX -eq 1 ]; then
-    FILE=`ls|grep tex`
+    FILE=`ls *.tex`
     PROCEED=1
 else
     echo "Found $NTEX tex files"
     PROCEED=0
     for ((f=1;f<=${NTEX};f++)); do
-        FILE=`ls|grep tex|head -n $f|tail -n 1`
+        FILE=`ls|grep tex|grep -v bak|head -n $f|tail -n 1`
         if [ "$FILE" == "$1" ]; then
            PROCEED=1
            break
@@ -18,7 +23,7 @@ else
     echo "You chose nothing, let's try again.."
     if [ $PROCEED == 0 ]; then
         for ((f=1;f<=${NTEX};f++)); do
-            FILE=`ls|grep tex|head -n $f|tail -n 1`
+            FILE=`ls|grep .tex|head -n $f|tail -n 1`
             read -p "Is it $FILE? [yn]  "
             if [ "$REPLY" == "y" ]; then
                PROCEED=1
@@ -28,11 +33,21 @@ else
     fi
 fi
 
+
+NBIB=`ls -1 *.bib 2>/dev/null | wc -l`
+
 if [ $PROCEED == 1 ]; then
-    NAME=`echo $FILE | cut -d '.' -f 1`
+    #NAME=`echo $FILE | cut -d '.' -f 1`
+    NAME=`basename $FILE ".tex"`
     echo "Processing $FILE.. ($NAME)"
+    echo $NAME2
     #rm -v ${name}.{aux,blg,bbl}
     pdflatex $FILE
+    if [ $NBIB != 0 ]; then 
+        echo "bibtex $NAME.aux"
+        bibtex $NAME.aux
+        bibtex $NAME.aux
+    fi 
     pdflatex $FILE
     evince $NAME.pdf&
 else
