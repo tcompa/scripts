@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# program: dlatex (bash script)
+# last-modified: 2015-07-14 -- 16:00 CEST
+# author: tc
+# notes:  compiles and show a latex source from the current directory
+
+
+NTEX=`ls ./*.tex |grep -v bak| wc -l`
+if [ $NTEX -eq 1 ]; then
+    FILE=`ls *.tex`
+    PROCEED=1
+else
+    echo "Found $NTEX tex files"
+    PROCEED=0
+    for ((f=1;f<=${NTEX};f++)); do
+        FILE=`ls|grep tex|grep -v bak|head -n $f|tail -n 1`
+        if [ "$FILE" == "$1" ]; then
+           PROCEED=1
+           break
+        fi
+        echo "You did not explicitly choose $FILE.."
+    done
+    echo "You chose nothing, let's try again.."
+    if [ $PROCEED == 0 ]; then
+        for ((f=1;f<=${NTEX};f++)); do
+            FILE=`ls|grep .tex|head -n $f|tail -n 1`
+            read -p "Is it $FILE? [yn]  "
+            if [ "$REPLY" == "y" ]; then
+               PROCEED=1
+               break
+            fi
+        done
+    fi
+fi
+
+
+NBIB=`ls -1 *.bib 2>/dev/null | wc -l`
+
+if [ $PROCEED == 1 ]; then
+    NAME=`basename $FILE ".tex"`
+    echo "Processing $FILE.. ($NAME)"
+    pdflatex $FILE
+    if [ $NBIB != 0 ]; then 
+        echo "bibtex $NAME.aux"
+        bibtex $NAME.aux
+        bibtex $NAME.aux
+    fi 
+    pdflatex $FILE
+    evince $NAME.pdf&
+else
+    echo "Nothing to do"
+    echo "Exit"
+fi
