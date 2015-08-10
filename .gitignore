@@ -1,0 +1,13 @@
+### Files ignored for commit
+*.log
+*.aux
+*.bbl
+*.blg
+*.toc
+.~*
+*~
+*swp
+\#*
+*.pyc
+*.o
+*.x
