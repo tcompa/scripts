@@ -1,0 +1,27 @@
+#!/usr/bin/gnuplot --persist
+
+# program: do_fit_with_errorbars.gpi
+# created: 2015-08-11 -- 19:30 CEST
+# author: tc
+# notes: does a fit of data with error bars on y, and gives the errorbars on
+#        the fit parameters
+#        tested on gnuplot 4.6 patchlevel 4
+
+
+set fit errorvariables
+set fit logfile 'log_fit.dat'
+set fit quiet
+
+set terminal wxt enhanced
+
+f(x)=A*x+B
+fit f(x) 'data.dat' u 1:2:3 via A,B
+
+print sprintf('A = %f +/- %f', A, A_err)
+print sprintf('A = %f +/- %f', B, B_err)
+
+set key top left
+
+plot\
+ 'data.dat' u 1:2:3 w e lw 1.5 title 'data'\
+,f(x) w l lw 2 title sprintf('f(x)=%.3f * x + %.3f', A, B)\
