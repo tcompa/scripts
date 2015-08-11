@@ -18,7 +18,7 @@ f(x)=A*x+B
 fit f(x) 'data.dat' u 1:2:3 via A,B
 
 print sprintf('A = %f +/- %f', A, A_err)
-print sprintf('A = %f +/- %f', B, B_err)
+print sprintf('B = %f +/- %f', B, B_err)
 
 set key top left
 
