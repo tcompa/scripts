@@ -21,7 +21,7 @@ from gr_2d import plot_gr
 class test_gr_2d():
 
     def test_generate_one_conf(self):
-        N = 25
+        N = 10
         dim = 2
         L = 100.0
         x = generate_one_conf(L, N, dim)
@@ -30,7 +30,7 @@ class test_gr_2d():
         assert_less_equal(x.max(), L)
 
     def test_compute_distances(self):
-        N = 25
+        N = 10
         dim = 2
         L = 100.0
         x = generate_one_conf(L, N, dim)
@@ -38,7 +38,7 @@ class test_gr_2d():
         assert_equal(dist.shape[0], N * (N - 1) / 2)
 
     def test_compute_gr_2d(self):
-        N = 25
+        N = 10
         dim = 2
         L = 100.0
         x = generate_one_conf(L, N, dim)
@@ -48,7 +48,7 @@ class test_gr_2d():
         assert_less_equal(gr.max(), L * numpy.sqrt(dim))
 
     def test_plot_gr(self):
-        N = 25
+        N = 10
         dim = 2
         L = 100.0
         x = generate_one_conf(L, N, dim)
