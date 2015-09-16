@@ -2,6 +2,9 @@
 program: bars_3d.py
 author: tc
 created: 2015-09-16 -- 23:30 CEST
+useful links:
+    + http://matplotlib.org/examples/mplot3d/hist3d_demo.html
+    + http://stackoverflow.com/a/27080258
 '''
 
 import numpy
