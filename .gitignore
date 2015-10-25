@@ -11,3 +11,4 @@
 *.pyc
 *.o
 *.x
+.ipynb_checkpoints
