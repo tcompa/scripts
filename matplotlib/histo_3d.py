@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 '''
 program: bars_3d.py
 author: tc
@@ -26,13 +28,9 @@ def show_matrix_3d(M):
         print 'WARNING: min(M)<0 can give strange visualization'
 
     # create x and y indices
-    X = numpy.empty_like(M)
-    Y = numpy.empty_like(M)
-    # TODO: replace this for loop with a numpy function
-    for ix in xrange(Nx):
-        for iy in xrange(Ny):
-            X[ix, iy] = ix
-            Y[ix, iy] = iy
+    ix = numpy.arange(Nx)
+    iy = numpy.arange(Ny)
+    X, Y = numpy.meshgrid(ix, iy)
     X = X.flatten()
     Y = Y.flatten()
 
@@ -50,9 +48,10 @@ def show_matrix_3d(M):
 
 
 # create a 2D matrix to visualize
-N = 25
-X = numpy.arange(N)
-Y = numpy.arange(N)
+Nx = 40
+Ny = 40
+X = numpy.arange(Nx)
+Y = numpy.arange(Ny)
 M = numpy.exp(- (X[:, None] / 2.0 - Y[None, :]) ** 2 -
               numpy.absolute((X[:, None] - 10.0) / 3.0))
 M = numpy.random.normal(M + 0.5, 0.1)

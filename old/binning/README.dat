@@ -1,9 +1,0 @@
-To generate an example dataset of correlated data:
-```
-python generate_correlated.py > data.dat
-```
-
-To extract the error:
-```
-python statistics.py data.dat
-```

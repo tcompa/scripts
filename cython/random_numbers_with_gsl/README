@@ -1,0 +1,4 @@
+To compile the cython file, use for instance
+
+    python setup_cython.py build_ext --inplace
+
