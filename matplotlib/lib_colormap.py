@@ -1,11 +1,12 @@
 #!/usr/bin/python
 
 '''
-program:     lib_colormap.py
-author:      tc
-created:     2015-09-23 -- 16 CEST
-description: given three one-dimensional arrays x, y, and z, plots the colormap
-             of z as a function of (x,y)
+program:       lib_colormap.py
+author:        tc
+created:       2015-09-23 -- 16 CEST
+last-modified: 2015-11-13 -- 11 CEST
+description:   given three one-dimensional arrays x, y, and z, plots the
+               colormap of z as a function of (x,y)
 '''
 
 import numpy
@@ -19,17 +20,12 @@ _all_ = ['colormap_custom']
 
 def choose_colors():
     '''
-    Returns a matplotlib colormap (the custom lib_viridis, if available, or the
-    coolwarm_r).
-    In case of problems, replace this entire function with its last line:
-        return plt.get_cmap('coolwarm_r')
+    If matplotlib version is >=1.5, use the 'viridis' colormap. For older
+    versions, fall back on another colormap.
     '''
-    import imp
     try:
-        imp.find_module('lib_viridis_cmap')
-        from lib_viridis_cmap import get_viridis_cmap
-        return get_viridis_cmap()
-    except ImportError:
+        return plt.get_cmap('viridis')
+    except ValueError:
         return plt.get_cmap('coolwarm_r')
 
 
