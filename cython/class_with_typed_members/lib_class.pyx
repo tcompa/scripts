@@ -9,7 +9,7 @@ import numpy
 cdef class MyClass:
 
     cdef public int N
-    cdef public double x, y
+    cdef public double x
 
     def __init__(self, int Nval=10):
         print '[MyClass.__init__]'
