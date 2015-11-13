@@ -9,3 +9,4 @@ The current build status is: [![Build Status](https://travis-ci.org/tcompa/scrip
 
 ### TODO
 * in cython, add reference to original source
+* clean up bash folder
