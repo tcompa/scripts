@@ -1,0 +1,7 @@
+This is an example of how to define a class in a cython module, and how to assign a type to some of its members.
+I don't know whether/how the same can be done for more complex members, e.g. an array.
+
+To compile the cython file, use for instance
+
+    python setup_cython.py build_ext --inplace
+
