@@ -54,7 +54,7 @@ n_occ = []
 for i in range(len(l_set)):
     n_occ.append([l_set[i],l.count(l_set[i])])
 print 'inventory of elements contained in the list: %s' % n_occ
-# method 2
+# method 2, with list comprehension
 l = ['a','a','a','b','b','c','d','d']
 n_occ = [[x, l.count(x)] for x in set(l)]
 print 'inventory of elements contained in the list: %s' % n_occ
