@@ -1,7 +1,8 @@
 '''
 program: lists_and_strings.py
 created: 2015-11-24 -- 14 CEST
-author: tc
+last modified: 2015-11-24 -- 14 CEST
+authors: tc qf
 '''
 
 # create and manipulate a list A
@@ -43,4 +44,4 @@ print 'D[-1]:', D[-1]
 print 'D.split(3):', D.split('3')
 E = D + '-abc'
 print 'E:', E
-print 'E.split(\'-\')[-1]: %s' % E.split('-')[-]1
+print 'E.split(\'-\')[-1]: %s' % E.split('-')[-1]
