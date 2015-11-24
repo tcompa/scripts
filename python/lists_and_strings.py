@@ -47,11 +47,14 @@ print 'E:', E
 print 'E.split(\'-\')[-1]: %s' % E.split('-')[-1]
 
 # how to count the number of times each different element of a list occur
-
-l=['a','a','a','b','b','c','d','d']
-l_set=list(set(l))
-n_occ=[]
+# method 1
+l = ['a','a','a','b','b','c','d','d']
+l_set = list(set(l))
+n_occ = []
 for i in range(len(l_set)):
     n_occ.append([l_set[i],l.count(l_set[i])])
 print 'inventory of elements contained in the list: %s' % n_occ
-
+# method 2
+l = ['a','a','a','b','b','c','d','d']
+n_occ = [[x, l.count(x)] for x in set(l)]
+print 'inventory of elements contained in the list: %s' % n_occ
