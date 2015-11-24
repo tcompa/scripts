@@ -1,7 +1,7 @@
 '''
 program: lists_and_strings.py
 created: 2015-11-24 -- 14 CEST
-last modified: 2015-11-24 -- 14 CEST
+last modified: 2015-11-24 -- 16 CEST
 authors: tc qf
 '''
 
@@ -45,3 +45,13 @@ print 'D.split(3):', D.split('3')
 E = D + '-abc'
 print 'E:', E
 print 'E.split(\'-\')[-1]: %s' % E.split('-')[-1]
+
+# how to count the number of times each different element of a list occur
+
+l=['a','a','a','b','b','c','d','d']
+l_set=list(set(l))
+n_occ=[]
+for i in range(len(l_set)):
+    n_occ.append([l_set[i],l.count(l_set[i])])
+print 'inventory of elements contained in the list: %s' % n_occ
+
