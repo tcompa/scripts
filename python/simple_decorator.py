@@ -5,7 +5,7 @@ author: tc, dc
 '''
 
 
-def decorator(f):
+def my_decorator(f):
     '''
     Decorator for the function f, which is a function of one parameter only.
     '''
@@ -21,7 +21,7 @@ def long_calculation(alpha):
     return alpha ** 2
 
 
-decorated_long_calculation = decorator(long_calculation)
+decorated_long_calculation = my_decorator(long_calculation)
 
 for i in range(- 5, 5):
     print i, long_calculation(i), decorated_long_calculation(i)
