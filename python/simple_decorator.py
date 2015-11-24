@@ -1,5 +1,5 @@
 '''
-program: decorator.py
+program: simple_decorator.py
 created: 2015-11-24 -- 15 CEST
 author: tc, dc
 '''
