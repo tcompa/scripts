@@ -17,10 +17,11 @@ def decorator(f):
     return decorated_f
 
 
-@decorator
 def long_calculation(alpha):
     return alpha ** 2
 
 
+decorated_long_calculation = decorator(long_calculation)
+
 for i in range(- 5, 5):
-    print i, long_calculation(i)
+    print i, long_calculation(i), decorated_long_calculation(i)
