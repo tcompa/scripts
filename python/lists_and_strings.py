@@ -50,3 +50,23 @@ print 'E.split(\'-\')[-1]: %s' % E.split('-')[-1]
 l = ['a','a','a','b','b','c','d','d']
 n_occ = [[x, l.count(x)] for x in set(l)]
 print 'inventory of elements contained in the list: %s' % n_occ
+
+#how to remove a given element from a list
+l2=l
+l2.remove('c')
+print 'list with the \'c\' element removed: %s' %l2
+
+#how to remove all occurrences of a given element
+l2=filter(lambda i: i!='b',l2)
+print 'list without the \'b\'\'s: %s' %l2
+
+#how to remove an element from a list when the element is identified by its index
+l2.pop(-3)
+print 'list with the antepenultimate element removed: %s' % l2
+
+#how to remove a slice from the list
+l3=l
+del l3[3:6]
+print 'list with the elements 2 to 4 removed: %s' % l 3
+
+
