@@ -67,6 +67,6 @@ print 'list with the antepenultimate element removed: %s' % l2
 #how to remove a slice from the list
 l3=l
 del l3[3:6]
-print 'list with the elements 2 to 4 removed: %s' % l 3
+print 'list with the elements 3 to 5 removed: %s' % l3
 
 
