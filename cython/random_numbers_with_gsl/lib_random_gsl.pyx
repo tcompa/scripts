@@ -2,8 +2,11 @@
 program: lib_random_gsl.pyx
 created: 2015-10-07 -- 12 CEST
 
-#FIXME: add original reference
+originally found in http://pyinsci.blogspot.fr/2010/12/efficcient-mcmc-in-python.html
 '''
+
+import random
+
 
 # declaring external GSL functions to be used
 cdef extern from "gsl/gsl_rng.h":
@@ -33,6 +36,23 @@ def stats_gaussian(int nsamples, double sigma):
     cdef int sample
     for sample in xrange(nsamples):
         x = gaussian(r, sigma)
+        tot += x
+        tot_sq += x ** 2
+    av = tot / float(nsamples)
+    av_sq = tot_sq / float(nsamples)
+    var = av_sq - av ** 2
+    return av, var
+
+def stats_gaussian_std(int nsamples, double sigma):
+    '''
+    Generates gaussian random samples and computes average and variance.
+    '''
+    cdef double x
+    cdef double tot = 0.0
+    cdef double tot_sq = 0.0
+    cdef int sample
+    for sample in xrange(nsamples):
+        x = random.gauss(0.0, sigma)
         tot += x
         tot_sq += x ** 2
     av = tot / float(nsamples)
