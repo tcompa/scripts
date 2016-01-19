@@ -3,7 +3,7 @@
 # program: col2gray.sh
 # author: tc
 # created: 2016-01-19 -- 12 CEST
-# notes: converts a pdf into grayscale
+# notes: converts a pdf into grayscale (based on http://superuser.com/a/164857)
 
 
 INPUT=$1
