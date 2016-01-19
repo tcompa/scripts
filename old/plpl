@@ -1,2 +1,0 @@
-#!/bin/bash
-echo "plot for [file in \"$(ls|grep dat|xargs echo)\""] file w lp title file | gnuplot --persist
