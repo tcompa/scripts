@@ -57,6 +57,13 @@ class gnuplot_instance:
         return
 
 if __name__ == '__main__':
-    G = gnuplot_instance({'persist': True})
-    G.add('plot sin(x)')
-    G.run()
+    p = gnuplot_instance()
+    p.add('set xlabel \'x\'')
+    p.add('set ylabel \'y\'')
+    p.add('set samples 1000')
+    p.add('set xrange [0:pi]')
+    p.add('plot \\')
+    for i in range(1, 3):
+        p.add(' cos(%.2f * x),\\' % float(i))
+    p.add(' cos(%.2f * x)' % 3.0)
+    p.run()
