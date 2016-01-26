@@ -2,7 +2,7 @@
 module:        lib_gnuplot.py
 author:        tc
 created:       2015-04-15
-last-modified: 2045-08-11 -- 22 CEST
+last-modified: 2015-08-11 -- 22 CEST
 notes:         allows a basic use of gnuplot in python
 '''
 
@@ -55,3 +55,8 @@ class gnuplot_instance:
         subprocess.Popen(['chmod', '+x', self.script.name])
         subprocess.Popen([self.script.name])
         return
+
+if __name__ == '__main__':
+    G = gnuplot_instance({'persist': True})
+    G.add('plot sin(x)')
+    G.run()
