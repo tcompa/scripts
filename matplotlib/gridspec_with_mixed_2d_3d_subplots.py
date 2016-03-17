@@ -25,9 +25,17 @@ ax_right_top = plt.subplot(gs[0, 2])
 
 # set some options for the 3d subplot
 ax_left_top.set_aspect(1)
-ax_left_top.set_xlim(-1, 1)
-ax_left_top.set_ylim(-1, 1)
-ax_left_top.set_zlim(-1, 1)
+ax_left_top.set_xlim3d(-1, 1)
+ax_left_top.set_ylim3d(-1, 1)
+ax_left_top.set_zlim3d(-1, 1)
+ax_left_top.set_xticks([])
+ax_left_top.set_yticks([])
+ax_left_top.set_zticks([])
+
+ax_left_bottom.set_aspect(1)
+ax_right_bottom.set_aspect(1)
+ax_right_top.set_aspect(1)
+ax_center.set_aspect(1)
 
 # plot data
 ax_left_top.scatter(x, y, z)
@@ -36,5 +44,7 @@ ax_center.plot(z, y, 'ko-')
 ax_right_bottom.plot(y, x, 'ko-')
 ax_right_top.plot(x, z, 'ko-')
 
-plt.savefig('a.png')
+plt.tight_layout()
+
+plt.savefig('a.png', bbox_inches='tight')
 plt.show()

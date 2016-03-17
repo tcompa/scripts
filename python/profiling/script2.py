@@ -1,38 +1,38 @@
 '''
-Fake program, to be profiled via kernprof. Note: naively running in python
-fails, due to the @profile decorators.
+Fake program, to be profiled via cProfile.
 '''
 
 import math
+import random
 
 
-@profile
-def useful_function_1():
-    for i in xrange(100):
-        b = math.sqrt(1.0)
-        for j in xrange(10):
-            b = math.exp(1.0)
+def function1():
+    x = 0
+    N = 10000
+    numbers = range(N)
+    for i in range(N):
+        x += random.random()
+        x += math.cos(x)
+        numbers.pop()
 
 
-@profile
-def useful_function_2():
-    for i in xrange(100):
-        if i % 2 == 0:
-            b = math.cos(1.0)
-        elif i % 3 == 0:
-            continue
-        else:
-            b = sum(math.factorial(n) for n in xrange(100))
-
-
-def useless_function():
-    print 'This function is pointless.'
+def function2():
+    N = 10
+    l = []
+    for i in xrange(N):
+        for j in xrange(N):
+            for k in xrange(N):
+                for h in xrange(N):
+                    s = sorted([i, j, k, h])
+                    l.append(s)
 
 
 # Main program
 
-useless_function()
-useful_function_1()
-useless_function()
-useful_function_2()
-useless_function()
+for i in xrange(50):
+    for j in xrange(10000):
+        eta = random.random()
+    if eta < 0.66:
+        function1()
+    else:
+        function2()
