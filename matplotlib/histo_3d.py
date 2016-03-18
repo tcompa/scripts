@@ -47,14 +47,15 @@ def show_matrix_3d(M):
     plt.show()
 
 
-# create a 2D matrix to visualize
-Nx = 40
-Ny = 40
-X = numpy.arange(Nx)
-Y = numpy.arange(Ny)
-M = numpy.exp(- (X[:, None] / 2.0 - Y[None, :]) ** 2 -
-              numpy.absolute((X[:, None] - 10.0) / 3.0))
-M = numpy.random.normal(M + 0.5, 0.1)
+if __name__ == '__main__':
+    # create a 2D matrix to visualize
+    Nx = 40
+    Ny = 40
+    X = numpy.arange(Nx)
+    Y = numpy.arange(Ny)
+    M = numpy.exp(- (X[:, None] / 2.0 - Y[None, :]) ** 2 -
+                  numpy.absolute((X[:, None] - 10.0) / 3.0))
+    M = numpy.random.normal(M + 0.5, 0.1)
 
-# do it
-show_matrix_3d(M)
+    # do it
+    show_matrix_3d(M)
