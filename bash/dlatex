@@ -35,7 +35,7 @@ else
 fi
 
 
-NBIB=`ls -1 *.bib 2>/dev/null | wc -l`
+NBIB=`ls -1 *.bib | grep -v Notes.bib 2>/dev/null | wc -l`
 
 if [ $PROCEED == 1 ]; then
     NAME=`basename $FILE ".tex"`
