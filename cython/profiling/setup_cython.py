@@ -17,7 +17,6 @@ from Cython.Compiler.Options import directive_defaults
 # these are useful for profiling
 directive_defaults['linetrace'] = True
 directive_defaults['binding'] = True
-directive_defaults['profile'] = True
 
 if __name__ == '__main__':
     for lib in glob.glob('*.pyx'):

@@ -11,7 +11,8 @@ import line_profiler
 from my_function import sum_cython
 
 
-arguments = [1000, 1000]
+# arguments to be passed to the function which I want to profile
+arguments = [1000, 100]
 
 profile = line_profiler.LineProfiler(sum_cython)
 profile.runcall(sum_cython, *arguments)
