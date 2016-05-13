@@ -4,7 +4,7 @@
 # author: tc
 # created: 2016-05-12 -- 19 CEST
 # notes: heavily inspired by the example in
-#        http://nbviewer.jupyter.org/gist/tillahoffmann/296501acea231cbdf5e7
+#        https://gist.github.com/tillahoffmann/296501acea231cbdf5e7
 
 
 import line_profiler

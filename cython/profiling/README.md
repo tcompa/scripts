@@ -1,4 +1,4 @@
-Basic line-by-line profiling of a cython function. This is essentially the same as http://nbviewer.jupyter.org/gist/tillahoffmann/296501acea231cbdf5e7, but without a notebook.  
+Basic line-by-line profiling of a cython function. This is essentially the same as https://gist.github.com/tillahoffmann/296501acea231cbdf5e7, but without a notebook.  
 
 Intructions:
  + Install [line_profiler](https://pypi.python.org/pypi/line_profiler/) (short story: `conda install line_profiler`, or `pip install line_profiler`).
