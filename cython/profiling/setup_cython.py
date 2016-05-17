@@ -17,12 +17,16 @@ from Cython.Compiler.Options import directive_defaults
 # these are useful for profiling
 directive_defaults['linetrace'] = True
 directive_defaults['binding'] = True
+directive_defaults['profile'] = True
+
+libraries = []
+# uncomment the next line if your cython code uses gsl functions
+#libraries = ['gsl', 'gslcblas']
 
 if __name__ == '__main__':
     for lib in glob.glob('*.pyx'):
         print 'compiling %s' % lib
         basename = lib[:-4]
-        libraries = ['gsl', 'gslcblas']          # to use gsl functions
         define_macros = [('CYTHON_TRACE', '1')]  # to profile
         ext_modules = [Extension(basename, [basename + '.pyx'],
                                  libraries=libraries,
