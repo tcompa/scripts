@@ -1,0 +1,22 @@
+One way to use a C function in python, passing through a cython wrapper.
+
+1. Write the C file (function_cos_sum.c) and the header file (function_cos_sum.h). In this example, it is the simple function `cos_sum`, which returns the cosine of the sum of its two arguments.
+2. Write a wrapper.pyx file which includes lines of this kind
+    ```python
+    cdef extern from "function_cos_sum.h":
+        double __cos_sum_c "cos_sum"(double, double)
+    
+    def cos_sum_c(double a, double b):
+        return __cos_sum_c(a, b)
+    ```
+The first block imports the function `cos_sum` defined in the header function_cos_sum.h, and renames it __cos_sum_c.
+The second block defines a python function cos_sum_c, which is just a wrapper of __cos_sum_c.
+3. Compile the wrapper by running  
+
+        python setup_cython.py build_ext --inplace
+
+    (remember to change the names of the C-function file, in setup_cython.py).
+4. In a python script (like main.py), import the function as
+    ```python
+    from wrapper import cos_sum_c
+    ```
