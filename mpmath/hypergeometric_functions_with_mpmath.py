@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 '''
 program:     hypergeometric_functions_with_mpmath.py
