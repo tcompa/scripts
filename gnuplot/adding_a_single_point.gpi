@@ -1,0 +1,4 @@
+#!/usr/bin/gnuplot -p
+
+plot cos(x), "<echo '0 0.75'" with point pointtype 6 pointsize 2 linewidth 2 linecolor 3
+
