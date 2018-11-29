@@ -15,7 +15,7 @@ for N in [10 ** 4, 10 ** 5, 10 ** 6]:
     print 'Read file with numpy: %.3f s' % (t1 - t0)
 
     t0 = time.clock()
-    x_pandas = pandas.read_csv(datafile, sep=' ', header=None).as_matrix()
+    x_pandas = pandas.read_csv(datafile, sep=' ', header=None).values
     t1 = time.clock()
     print 'Read file with pandas: %.3f s' % (t1 - t0)
 
