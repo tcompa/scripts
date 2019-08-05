@@ -23,9 +23,9 @@ def show_matrix_3d(M):
     assert len(M.shape) == 2, 'ERROR: M should be 2D, not %iD' % len(M.shape)
     Nx, Ny = M.shape
     if Nx != Ny:
-        print 'WARNING: not tested for rectangular matrix'
+        print('WARNING: not tested for rectangular matrix')
     if M.min():
-        print 'WARNING: min(M)<0 can give strange visualization'
+        print('WARNING: min(M)<0 can give strange visualization')
 
     # create x and y indices
     ix = numpy.arange(Nx)
